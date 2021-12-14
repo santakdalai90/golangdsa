@@ -1,2 +1,2 @@
 language = "go"
-run = "go test -v ./test"
+run = "go test -v ./test/..."
