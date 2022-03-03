@@ -2,16 +2,18 @@ package binary_search_tree
 
 import (
     "fmt"
+    "encoding/json"
+    "log"
 )
 
 type Node struct {
-    Val int
-    Left *Node
-    Right *Node
+    Val int `json:"Val"`
+    Left *Node `json:"Left"`
+    Right *Node `json:"Right"`
 }
 
 type BST struct {
-    Root *Node
+    Root *Node  `json:"Root"`
 }
 
 func New() *BST {
@@ -90,4 +92,108 @@ func (b *BST) Print(){
     print(b.Root)
 
     fmt.Println("||--------********************--------||")
+}
+
+func (b *BST) PrintJson() {
+    // visualize the output using https://vanya.jp.net/vtree/
+    raw,err := json.MarshalIndent(b.Root, "", "\t")
+    if err != nil {
+        log.Println("Error marshalling the tree")
+        return
+    }
+    log.Println(string(raw))
+}
+
+func (b *BST) Remove(val int) {
+    b.Root = remove(b.Root, val)
+}
+
+func remove(root *Node, val int) *Node{
+    // find the node to remove
+    var currentNode *Node = root
+    var parentNode *Node
+    var NTR, successor *Node    // NTR => Node To Remove
+    for currentNode != nil{
+        if currentNode.Val > val {
+            parentNode = currentNode
+            currentNode = currentNode.Left
+        } else if currentNode.Val < val {
+            parentNode = currentNode
+            currentNode = currentNode.Right
+        } else {
+            NTR = currentNode
+            break
+        }
+    }
+    if NTR == nil {
+        log.Println("Node not found in the tree")
+        return root
+    }
+    // if no children
+    if NTR.Left == nil && NTR.Right == nil {
+        successor = nil
+        if parentNode != nil {    // to handle root node
+            if NTR == parentNode.Left {
+                parentNode.Left = successor
+            } else {
+                parentNode.Right = successor
+            }
+        }
+    }
+    
+    // if single child
+    if NTR.Left == nil && NTR.Right != nil {
+        successor = NTR.Right
+        if parentNode != nil {    // to handle root node
+            if NTR == parentNode.Left {
+                parentNode.Left = successor
+            } else {
+                parentNode.Right = successor
+            }
+        }
+    } else if NTR.Right == nil && NTR.Left != nil {
+        successor = NTR.Left
+        if parentNode != nil {    // to handle root node
+            if NTR == parentNode.Left {
+                parentNode.Left = successor
+            } else {
+                parentNode.Right = successor
+            }
+        }
+    }
+
+    
+    
+    // if both children
+    if NTR.Left != nil && NTR.Right != nil {
+        //get the min of right sub-tree of NTR as successor
+        //Print(root)
+        successor = getMinNode(NTR.Right)
+        
+        // exchange the value from NTR node
+        NTR.Val = successor.Val
+        // remove the successor
+        NTR.Right = remove(NTR.Right, successor.Val)
+
+         //Print(root)
+        
+        if parentNode == nil {
+            // deleting root node
+            return NTR
+        }
+    }
+
+    if parentNode == nil {
+        // deleting root node
+        return successor
+    }
+
+    return root
+}
+
+func getMinNode(root *Node) *Node{
+    if root == nil || root.Left == nil {
+        return root
+    }
+    return getMinNode(root.Left)
 }
