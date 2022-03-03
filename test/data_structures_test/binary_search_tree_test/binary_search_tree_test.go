@@ -16,7 +16,7 @@ func Test_Insert(t *testing.T) {
     bst.Insert(170)
     bst.Insert(15)
     bst.Insert(1)
-    bst.PrintJson()
+    t.Log(bst)
 }
 
 func Test_Search(t *testing.T) {
@@ -44,8 +44,8 @@ func Test_Delete(t *testing.T) {
     bst.Insert(170)
     bst.Insert(15)
     bst.Insert(1)
-    bst.PrintJson()
+    t.Log(bst)
 
     bst.Remove(9)
-    bst.PrintJson()
+    t.Log(bst)
 }
