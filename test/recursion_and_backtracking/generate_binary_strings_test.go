@@ -8,5 +8,5 @@ import (
 
 func TestBinaryString(t *testing.T) {
 	t.Log("Binary strings of length 5:", recursion_and_backtracking.BinaryString(5))
-    t.Log("Binary strings of length 3:", recursion_and_backtracking.BinaryString(3))
+	t.Log("Binary strings of length 3:", recursion_and_backtracking.BinaryString(3))
 }
