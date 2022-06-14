@@ -14,8 +14,8 @@ func BubbleSort(arr []int) {
 		for i := 0; i < lastIdx; i++ {
 			if arr[i] > arr[i+1] {
 				arr[i], arr[i+1] = arr[i+1], arr[i]
+                sorted = false
 			}
-			sorted = false
 		}
 		lastIdx--
 	}
