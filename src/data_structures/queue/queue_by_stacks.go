@@ -6,24 +6,24 @@ import (
 	"golang-dsa/src/data_structures/stack"
 )
 
-type QueueByStacks struct {
-	s1 *stack.Stack
-	s2 *stack.Stack
+type QueueByStacks[T any] struct {
+	s1 *stack.Stack[T]
+	s2 *stack.Stack[T]
 }
 
-func NewQueueByStacks() *QueueByStacks {
-	q := QueueByStacks{}
-	q.s1 = stack.New()
-	q.s2 = stack.New()
+func NewQueueByStacks[T any]() *QueueByStacks[T] {
+	q := QueueByStacks[T]{}
+	q.s1 = stack.New[T]()
+	q.s2 = stack.New[T]()
 
 	return &q
 }
 
-func (q *QueueByStacks) Push(item interface{}) error {
-	return q.s1.Push(item)
+func (q *QueueByStacks[T]) Push(item T) {
+	q.s1.Push(item)
 }
 
-func (q *QueueByStacks) Pop() (interface{}, error) {
+func (q *QueueByStacks[T]) Pop() (T, error) {
 	front, err := q.s2.Pop()
 	if errors.Is(err, stack.NewStackEmptyError()) {
 		//s2 is empty; transfer data from s1

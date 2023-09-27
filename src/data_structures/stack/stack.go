@@ -4,47 +4,49 @@ import (
 	"fmt"
 )
 
-type Stack struct {
-	Data []interface{} // top towards the end
+type Stack[T any] struct {
+	data []T
+	size int
 }
 
-func New() *Stack {
-	s := Stack{}
-
-	s.Data = make([]interface{}, 0)
-
-	return &s
+func New[T any]() *Stack[T] {
+	s := new(Stack[T])
+	s.data = make([]T, 0)
+	s.size = 0
+	return s
 }
 
-func (s *Stack) Push(item interface{}) error {
-	s.Data = append(s.Data, item)
-	return nil
+func (s *Stack[T]) Push(k T) {
+	s.data = append(s.data, k)
+	s.size++
 }
 
-func (s *Stack) Pop() (interface{}, error) {
-	if s == nil || len(s.Data) == 0 {
-		return nil, NewStackEmptyError()
+func (s *Stack[T]) Top() (T, error) {
+	if s.size == 0 {
+		var empty T
+		return empty, NewStackEmptyError()
 	}
-	top := s.Data[len(s.Data)-1]
-	s.Data = s.Data[:len(s.Data)-1]
-	return top, nil
+	return s.data[s.size-1], nil
 }
 
-func (s *Stack) Top() (interface{}, error) {
-	if s == nil || len(s.Data) == 0 {
-		return nil, NewStackEmptyError()
+func (s *Stack[T]) Pop() (T, error) {
+	if s.size == 0 {
+		var empty T
+		return empty, NewStackEmptyError()
 	}
-	top := s.Data[len(s.Data)-1]
-	return top, nil
+	p := s.data[s.size-1]
+	s.data = s.data[:s.size-1]
+	s.size--
+	return p, nil
 }
 
-func (s *Stack) Print() {
-	if s == nil || len(s.Data) == 0 {
+func (s *Stack[T]) Print() {
+	if s == nil || len(s.data) == 0 {
 		fmt.Println("stack is empty")
 		return
 	}
 
-	for i := len(s.Data) - 1; i >= 0; i-- {
-		fmt.Println(s.Data[i])
+	for i := len(s.data) - 1; i >= 0; i-- {
+		fmt.Println(s.data[i])
 	}
 }
