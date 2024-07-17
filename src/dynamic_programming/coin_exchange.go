@@ -53,3 +53,25 @@ func CoinExchange(denominations []int, amount int) {
 		i--
 	}
 }
+
+// CoinExchangeNoBackTrack returns the minimum number of coins required without giving the denominations
+func CoinExchangeNoBackTrack(denominations []int, amount int) int {
+	// create 1-dimensional array
+
+	table := make([]int, amount+1)
+
+	j := 0
+	for i := 0; i <= amount; i++ {
+		table[i] = i
+	}
+
+	for j = 1; j < len(denominations); j++ {
+		for i := 1; i <=amount; i++ {
+			if (i >= denominations[j]) && (table[i-denominations[j]] + 1 < table[i]) {
+				table[i] = table[i-denominations[j]] + 1
+			}
+		}
+	}
+
+	return table[amount]
+}

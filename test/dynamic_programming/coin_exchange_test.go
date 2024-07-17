@@ -2,6 +2,9 @@ package dynamicprogramming
 
 import (
 	dynamicprogramming "golang-dsa/src/dynamic_programming"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func ExampleCoinExchange() {
@@ -24,4 +27,10 @@ func ExampleCoinExchange() {
 	// 7
 	// 7
 	// 1
+}
+
+func TestCoinExchangeNoBackTrack(t *testing.T) {
+	assert.Equal(t, 2, dynamicprogramming.CoinExchangeNoBackTrack([]int{1, 7, 10}, 14))
+	assert.Equal(t, 4, dynamicprogramming.CoinExchangeNoBackTrack([]int{1, 7, 10}, 13))
+	assert.Equal(t, 3, dynamicprogramming.CoinExchangeNoBackTrack([]int{1, 7, 10}, 15))
 }
