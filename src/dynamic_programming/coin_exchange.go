@@ -1,16 +1,16 @@
 package dynamicprogramming
 
-import "fmt"
+import (
+	"fmt"
+	"golang-dsa/src/util"
+)
 
 // Given an amount and you have infinite number of coins of given denominations, you have to find the minimum
 // number of coins which sums up to the amount and also print the coins involved.
 
 func CoinExchange(denominations []int, amount int) {
 	// initialize table
-	table := make([][]int, amount+1)
-	for i := range table {
-		table[i] = make([]int, len(denominations))
-	}
+	table := util.Create2DSlice(amount+1, len(denominations))
 
 	for i := 0; i < amount+1; i++ {
 		table[i][0] = i
@@ -66,8 +66,8 @@ func CoinExchangeNoBackTrack(denominations []int, amount int) int {
 	}
 
 	for j = 1; j < len(denominations); j++ {
-		for i := 1; i <=amount; i++ {
-			if (i >= denominations[j]) && (table[i-denominations[j]] + 1 < table[i]) {
+		for i := 1; i <= amount; i++ {
+			if (i >= denominations[j]) && (table[i-denominations[j]]+1 < table[i]) {
 				table[i] = table[i-denominations[j]] + 1
 			}
 		}
