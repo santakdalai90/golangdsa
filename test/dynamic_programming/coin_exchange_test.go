@@ -33,4 +33,5 @@ func TestCoinExchangeNoBackTrack(t *testing.T) {
 	assert.Equal(t, 2, dynamicprogramming.CoinExchangeNoBackTrack([]int{1, 7, 10}, 14))
 	assert.Equal(t, 4, dynamicprogramming.CoinExchangeNoBackTrack([]int{1, 7, 10}, 13))
 	assert.Equal(t, 3, dynamicprogramming.CoinExchangeNoBackTrack([]int{1, 7, 10}, 15))
+	assert.Equal(t, 3, dynamicprogramming.CoinExchangeNoBackTrack([]int{2, 3, 5, 7, 8}, 18))
 }
