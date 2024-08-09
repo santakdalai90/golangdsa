@@ -127,7 +127,7 @@ func DamerauLevenshteinEditDistance(source, target string) int {
 	n := len(t)
 
 	// create table
-	E := util.Create2DSlice(m+1, n+1)
+	E := util.Create2DSlice[int](m+1, n+1)
 
 	// base case
 	for i := 0; i <= m; i++ {

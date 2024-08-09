@@ -17,7 +17,7 @@ type Item struct {
 func Knapsack01(knapsackSize int, items []Item) {
 	n := len(items)
 	// create table
-	table := util.Create2DSlice(n+1, knapsackSize+1)
+	table := util.Create2DSlice[int](n+1, knapsackSize+1)
 
 	// fill table
 	for i := 1; i <= n; i++ {

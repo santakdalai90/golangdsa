@@ -10,7 +10,7 @@ import (
 
 func CoinExchange(denominations []int, amount int) {
 	// initialize table
-	table := util.Create2DSlice(amount+1, len(denominations))
+	table := util.Create2DSlice[int](amount+1, len(denominations))
 
 	for i := 0; i < amount+1; i++ {
 		table[i][0] = i

@@ -11,10 +11,10 @@ func Print2DArray(arr [][]int) {
 	}
 }
 
-func Create2DSlice(m, n int) [][]int {
-	slice2D := make([][]int, m)
+func Create2DSlice[T any](m, n int) [][]T {
+	slice2D := make([][]T, m)
 	for i := range slice2D {
-		slice2D[i] = make([]int, n)
+		slice2D[i] = make([]T, n)
 	}
 	return slice2D
 }

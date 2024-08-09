@@ -9,7 +9,7 @@ import (
 
 func LCS(X, Y string) (int, string) {
 	m, n := len(X), len(Y)
-	table := util.Create2DSlice(m+1, n+1)
+	table := util.Create2DSlice[int](m+1, n+1)
 
 	for i := 0; i <= m; i++ {
 		for j := 0; j <= n; j++ {
@@ -45,7 +45,7 @@ func LCS(X, Y string) (int, string) {
 
 func LCSOptimized(X, Y string) int {
 	m, n := len(X), len(Y)
-	table := util.Create2DSlice(2, n+1)
+	table := util.Create2DSlice[int](2, n+1)
 	// base case
 	for j := 0; j <= n; j++ {
 		table[0][j] = 0
