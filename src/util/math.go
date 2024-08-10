@@ -19,3 +19,20 @@ func Min(args ...int) int {
 	}
 	return min
 }
+
+func IntCompare(a, b int) int {
+	return a - b
+}
+
+func Max[T any](compare func(a, b T) int, elements ...T) T {
+	if len(elements) == 0 {
+		panic("no max for empty arguments")
+	}
+	var ans T = elements[0]
+	for _, x := range elements {
+		if compare(ans, x) > 0 { //ans > x
+			ans = x
+		}
+	}
+	return ans
+}

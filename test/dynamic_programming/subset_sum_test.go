@@ -9,18 +9,18 @@ import (
 
 func TestSubsetSum(t *testing.T) {
 	tests := []struct {
-		name         string
-		set       []int
-		sum       int
-		exists	bool
+		name   string
+		set    []int
+		sum    int
+		exists bool
 	}{
-		{"simle", []int{3, 34, 4, 12, 5, 2}, 9, true},
-		{"doesn't exsit",[]int{3, 34, 4, 12, 5, 2}, 30, false},
-		{"empty array",[]int{}, 0, true},
-		{"single element exists",[]int{10}, 10, true},
-		{"single element doesn't exist",[]int{10}, 5, false},
-		{"large array exists",[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 55, true},
-		{"large array doesn't exist",[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 60, false},
+		{"simple", []int{3, 34, 4, 12, 5, 2}, 9, true},
+		{"doesn't exsit", []int{3, 34, 4, 12, 5, 2}, 30, false},
+		{"empty array", []int{}, 0, true},
+		{"single element exists", []int{10}, 10, true},
+		{"single element doesn't exist", []int{10}, 5, false},
+		{"large array exists", []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 55, true},
+		{"large array doesn't exist", []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 60, false},
 	}
 
 	for _, test := range tests {

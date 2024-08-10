@@ -75,3 +75,36 @@ func CoinExchangeNoBackTrack(denominations []int, amount int) int {
 
 	return table[amount]
 }
+
+// CountOfWaysToExchange returns the number of possible ways the given amount
+// be exchanged with the availabel denominations
+func CountOfWaysToExchange(denominations []int, amount int) int {
+	// create table
+	table := util.Create2DSlice[int](len(denominations), amount+1)
+
+	// base case
+	for i := 0; i < len(denominations); i++ {
+		table[i][0] = 1
+	}
+
+	for j := 1; j <= amount; j++ {
+		table[0][j] = 1
+	}
+
+	// fill the table with count of solutions
+	for i := 1; i < len(denominations); i++ {
+
+		for j := 1; j <= amount; j++ {
+			if denominations[i] <= j {
+				// fmt.Printf("denominations: %d, i: %d, j: %d\n", len(denominations), i, j)
+				table[i][j] = table[i-1][j] + table[i][j-denominations[i]]
+			} else {
+				table[i][j] = table[i-1][j]
+			}
+		}
+	}
+
+	// util.Print2DArray(table)
+
+	return table[len(denominations)-1][amount]
+}

@@ -2,7 +2,7 @@ package util
 
 import "fmt"
 
-func Print2DArray(arr [][]int) {
+func Print2DArray[T any](arr [][]T) {
 	for i := 0; i < len(arr); i++ {
 		for j := 0; j < len(arr[i]); j++ {
 			fmt.Print(arr[i][j], "\t\t")
@@ -18,5 +18,3 @@ func Create2DSlice[T any](m, n int) [][]T {
 	}
 	return slice2D
 }
-
-
