@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 
-	"github.com/santakdalai90/GolangDSA/src"
+	"github.com/santakdalai90/golangdsa/src"
 	"github.com/stretchr/testify/assert"
 )
 

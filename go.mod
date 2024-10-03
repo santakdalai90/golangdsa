@@ -1,4 +1,4 @@
-module github.com/santakdalai90/GolangDSA
+module github.com/santakdalai90/golangdsa
 
 go 1.23
 
