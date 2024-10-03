@@ -1,7 +1,7 @@
 package queue_test
 
 import (
-	"github.com/santakdalai90/golang-dsa/src/data_structures/queue"
+	"github.com/santakdalai90/GolangDSA/src/data_structures/queue"
 	"testing"
 
 	"github.com/stretchr/testify/require"

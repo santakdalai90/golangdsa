@@ -1,9 +1,10 @@
 package test
 
 import (
-	"github.com/stretchr/testify/assert"
-	"github.com/santakdalai90/golang-dsa/src"
 	"testing"
+
+	"github.com/santakdalai90/GolangDSA/src"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestBinarySearch(t *testing.T) {

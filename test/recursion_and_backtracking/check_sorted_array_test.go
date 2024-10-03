@@ -1,9 +1,10 @@
 package recursion_and_backtracking
 
 import (
-	"github.com/stretchr/testify/assert"
-	"github.com/santakdalai90/golang-dsa/src/recursion_and_backtracking"
 	"testing"
+
+	"github.com/santakdalai90/GolangDSA/src/recursion_and_backtracking"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIsSorted(t *testing.T) {

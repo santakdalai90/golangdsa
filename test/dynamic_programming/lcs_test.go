@@ -1,7 +1,7 @@
 package dynamicprogramming
 
 import (
-	dynamicprogramming "github.com/santakdalai90/golang-dsa/src/dynamic_programming"
+	dynamicprogramming "github.com/santakdalai90/GolangDSA/src/dynamic_programming"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

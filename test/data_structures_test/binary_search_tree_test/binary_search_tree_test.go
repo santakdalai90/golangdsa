@@ -1,7 +1,7 @@
 package binary_search_tree_test
 
 import (
-	BST "github.com/santakdalai90/golang-dsa/src/data_structures/binary_search_tree"
+	BST "github.com/santakdalai90/GolangDSA/src/data_structures/binary_search_tree"
 	"testing"
 )
 

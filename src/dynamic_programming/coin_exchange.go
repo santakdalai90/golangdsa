@@ -2,7 +2,7 @@ package dynamicprogramming
 
 import (
 	"fmt"
-	"github.com/santakdalai90/golang-dsa/src/util"
+	"github.com/santakdalai90/GolangDSA/src/util"
 )
 
 // Given an amount and you have infinite number of coins of given denominations, you have to find the minimum

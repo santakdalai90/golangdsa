@@ -1,7 +1,7 @@
 package bitset_test
 
 import (
-	"github.com/santakdalai90/golang-dsa/src/data_structures/bitset"
+	"github.com/santakdalai90/GolangDSA/src/data_structures/bitset"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
