@@ -1,7 +1,7 @@
 package graph_test
 
 import (
-	"golang-dsa/src/data_structures/graph"
+	"github.com/santakdalai90/golang-dsa/src/data_structures/graph"
 	"testing"
 )
 

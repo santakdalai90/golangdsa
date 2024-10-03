@@ -1,4 +1,4 @@
-module golang-dsa
+module github.com/santakdalai90/golang-dsa
 
 go 1.21
 

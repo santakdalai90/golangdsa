@@ -2,7 +2,7 @@ package recursion_and_backtracking
 
 import (
 	//"github.com/stretchr/testify/assert"
-	"golang-dsa/src/recursion_and_backtracking"
+	"github.com/santakdalai90/golang-dsa/src/recursion_and_backtracking"
 	"testing"
 )
 

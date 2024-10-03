@@ -3,7 +3,7 @@ package dynamicprogramming
 import (
 	"bufio"
 	"fmt"
-	"golang-dsa/src/util"
+	"github.com/santakdalai90/golang-dsa/src/util"
 	"os"
 	"regexp"
 	"slices"

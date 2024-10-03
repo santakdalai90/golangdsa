@@ -2,7 +2,7 @@ package dynamicprogramming
 
 import (
 	"fmt"
-	"golang-dsa/src/util"
+	"github.com/santakdalai90/golang-dsa/src/util"
 )
 
 // Given a knapsack with a capacity and some items with given weight and value,

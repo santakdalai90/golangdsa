@@ -1,7 +1,7 @@
 package stack_test
 
 import (
-	"golang-dsa/src/data_structures/stack"
+	"github.com/santakdalai90/golang-dsa/src/data_structures/stack"
 	"testing"
     "github.com/stretchr/testify/require"
 )

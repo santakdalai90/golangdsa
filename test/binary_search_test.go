@@ -2,7 +2,7 @@ package test
 
 import (
 	"github.com/stretchr/testify/assert"
-	"golang-dsa/src"
+	"github.com/santakdalai90/golang-dsa/src"
 	"testing"
 )
 

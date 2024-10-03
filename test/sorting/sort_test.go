@@ -2,7 +2,7 @@ package sorting
 
 import (
 	"github.com/stretchr/testify/assert"
-	"golang-dsa/src/sorting"
+	"github.com/santakdalai90/golang-dsa/src/sorting"
 	"testing"
 )
 

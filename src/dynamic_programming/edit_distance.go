@@ -1,6 +1,6 @@
 package dynamicprogramming
 
-import "golang-dsa/src/util"
+import "github.com/santakdalai90/golang-dsa/src/util"
 
 // Given two strings source and target, find the edit distance between the two.
 // Permitted operations are insertion, deletion, and replacement

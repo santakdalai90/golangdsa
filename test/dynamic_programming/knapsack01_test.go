@@ -1,7 +1,7 @@
 package dynamicprogramming
 
 import (
-	dynamicprogramming "golang-dsa/src/dynamic_programming"
+	dynamicprogramming "github.com/santakdalai90/golang-dsa/src/dynamic_programming"
 )
 
 func ExampleKnapsack01() {
