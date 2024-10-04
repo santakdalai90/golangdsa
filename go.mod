@@ -1,4 +1,4 @@
-module golangdsa
+module github.com/santakdalai90/golangdsa
 
 go 1.23.2
 

@@ -3,7 +3,7 @@ package dynamicprogramming
 import (
 	"math"
 
-	"golangdsa/util"
+	"github.com/santakdalai90/golangdsa/util"
 )
 
 // Given two strings find the longest common subsequence and its length

@@ -1,7 +1,7 @@
 package dynamicprogramming
 
 import (
-	"golangdsa/util"
+	"github.com/santakdalai90/golangdsa/util"
 )
 
 // Given a set and a number, figure out if there exists a subset

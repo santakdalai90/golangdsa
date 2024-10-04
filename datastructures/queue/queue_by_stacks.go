@@ -3,7 +3,8 @@ package queue
 
 import (
 	"errors"
-	"golangdsa/datastructures/stack"
+
+	"github.com/santakdalai90/golangdsa/datastructures/stack"
 )
 
 type QueueByStacks[T any] struct {

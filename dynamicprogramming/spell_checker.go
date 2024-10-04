@@ -9,7 +9,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"golangdsa/util"
+	"github.com/santakdalai90/golangdsa/util"
 )
 
 // Given a corpus of words and a word check if it's spelling is correct.
