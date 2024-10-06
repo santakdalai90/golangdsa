@@ -15,6 +15,31 @@ func NewSinglyLinkedList[T comparable]() *SinglyLinkedList[T] {
 	return &SinglyLinkedList[T]{}
 }
 
+func (sll *SinglyLinkedList[T]) AppendArray(arr []T) {
+	if len(arr) == 0 {
+		return
+	}
+
+	// append first element from the array
+	newNode := &node[T]{data: arr[0]}
+	if sll.GetHead() == nil {
+		sll.head = newNode
+	} else {
+		curr := sll.GetHead()
+		for curr.GetNext() != nil {
+			curr = curr.GetNext()
+		}
+		curr.SetNext(newNode)
+	}
+
+	// append remainder of the array
+	curr := newNode
+	for _, a := range arr[1:] {
+		curr.SetNext(&node[T]{data: a})
+		curr = curr.GetNext()
+	}
+}
+
 func (sll *SinglyLinkedList[T]) GetHead() *node[T] {
 	return sll.head
 }

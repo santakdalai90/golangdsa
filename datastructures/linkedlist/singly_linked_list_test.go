@@ -25,6 +25,23 @@ func TestSinglyLinkedList(t *testing.T) {
 		}
 	})
 
+	t.Run("AppendArray", func(t *testing.T) {
+		list := NewSinglyLinkedList[int]()
+		list.AppendArray([]int{1, 2, 3})
+
+		expected := []int{1, 2, 3}
+		result := []int{}
+		curr := list.GetHead()
+		for curr != nil {
+			result = append(result, curr.GetData())
+			curr = curr.GetNext()
+		}
+
+		if !reflect.DeepEqual(result, expected) {
+			t.Errorf("AppendToTail failed. Expected %v, got %v", expected, result)
+		}
+	})
+
 	t.Run("DeleteNode - delete middle node", func(t *testing.T) {
 		list := NewSinglyLinkedList[int]()
 		list.AppendToTail(1)
