@@ -7,21 +7,21 @@ type node[T comparable] struct {
 	next *node[T]
 }
 
-type singlyLinkedList[T comparable] struct {
+type SinglyLinkedList[T comparable] struct {
 	head *node[T]
 }
 
-func NewSinglyLinkedList[T comparable]() *singlyLinkedList[T] {
-	return &singlyLinkedList[T]{
+func NewSinglyLinkedList[T comparable]() *SinglyLinkedList[T] {
+	return &SinglyLinkedList[T]{
 		&node[T]{},
 	}
 }
 
-func (sll *singlyLinkedList[T]) GetFirstNode() *node[T] {
+func (sll *SinglyLinkedList[T]) GetFirstNode() *node[T] {
 	return sll.head.next // skip the dummy head
 }
 
-func (sll *singlyLinkedList[T]) AppendToTail(data T) {
+func (sll *SinglyLinkedList[T]) AppendToTail(data T) {
 	newNode := &node[T]{data: data}
 
 	curr := sll.head
@@ -32,7 +32,7 @@ func (sll *singlyLinkedList[T]) AppendToTail(data T) {
 	curr.next = newNode
 }
 
-func (sll *singlyLinkedList[T]) DeleteNode(data T) {
+func (sll *SinglyLinkedList[T]) DeleteNode(data T) {
 	curr := sll.head
 	for curr.next != nil {
 		if curr.next.data == data {
@@ -43,7 +43,7 @@ func (sll *singlyLinkedList[T]) DeleteNode(data T) {
 	}
 }
 
-func (sll *singlyLinkedList[T]) Display() {
+func (sll *SinglyLinkedList[T]) Display() {
 	curr := sll.head.next // skip the dummy head node
 	for curr != nil {
 		fmt.Print(curr.data, " -> ")
