@@ -14,10 +14,10 @@ func TestSinglyLinkedList(t *testing.T) {
 
 		expected := []int{1, 2, 3}
 		result := []int{}
-		curr := list.GetFirstNode()
+		curr := list.GetHead()
 		for curr != nil {
-			result = append(result, curr.data)
-			curr = curr.next
+			result = append(result, curr.GetData())
+			curr = curr.GetNext()
 		}
 
 		if !reflect.DeepEqual(result, expected) {
@@ -34,10 +34,10 @@ func TestSinglyLinkedList(t *testing.T) {
 
 		expected := []int{1, 3}
 		result := []int{}
-		curr := list.GetFirstNode()
+		curr := list.GetHead()
 		for curr != nil {
-			result = append(result, curr.data)
-			curr = curr.next
+			result = append(result, curr.GetData())
+			curr = curr.GetNext()
 		}
 
 		if !reflect.DeepEqual(result, expected) {
@@ -53,10 +53,10 @@ func TestSinglyLinkedList(t *testing.T) {
 
 		expected := []int{2}
 		result := []int{}
-		curr := list.GetFirstNode()
+		curr := list.GetHead()
 		for curr != nil {
-			result = append(result, curr.data)
-			curr = curr.next
+			result = append(result, curr.GetData())
+			curr = curr.GetNext()
 		}
 
 		if !reflect.DeepEqual(result, expected) {
@@ -73,10 +73,10 @@ func TestSinglyLinkedList(t *testing.T) {
 
 		expected := []int{1, 2}
 		result := []int{}
-		curr := list.GetFirstNode()
+		curr := list.GetHead()
 		for curr != nil {
-			result = append(result, curr.data)
-			curr = curr.next
+			result = append(result, curr.GetData())
+			curr = curr.GetNext()
 		}
 
 		if !reflect.DeepEqual(result, expected) {
@@ -93,10 +93,10 @@ func TestSinglyLinkedList(t *testing.T) {
 
 		expected := []int{1, 2, 3}
 		result := []int{}
-		curr := list.GetFirstNode()
+		curr := list.GetHead()
 		for curr != nil {
-			result = append(result, curr.data)
-			curr = curr.next
+			result = append(result, curr.GetData())
+			curr = curr.GetNext()
 		}
 
 		if !reflect.DeepEqual(result, expected) {
