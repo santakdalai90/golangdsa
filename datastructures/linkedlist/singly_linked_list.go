@@ -28,11 +28,11 @@ func (sll *SinglyLinkedList[T]) AppendToTail(data T) {
 	}
 
 	curr := sll.head
-	for curr.next != nil {
-		curr = curr.next
+	for curr.GetNext() != nil {
+		curr = curr.GetNext()
 	}
 
-	curr.next = newNode
+	curr.SetNext(newNode)
 }
 
 func (sll *SinglyLinkedList[T]) DeleteNode(data T) {
@@ -41,17 +41,17 @@ func (sll *SinglyLinkedList[T]) DeleteNode(data T) {
 	}
 
 	if sll.head.data == data {
-		sll.head = sll.head.next
+		sll.head = sll.head.GetNext()
 		return
 	}
 
 	curr := sll.head
-	for curr.next != nil {
-		if curr.next.data == data {
-			curr.next = curr.next.next
+	for curr.GetNext() != nil {
+		if curr.GetNext().GetData() == data {
+			curr.SetNext(curr.GetNext().GetNext())
 			return
 		}
-		curr = curr.next
+		curr = curr.GetNext()
 	}
 }
 
@@ -59,7 +59,7 @@ func (sll *SinglyLinkedList[T]) Display() {
 	curr := sll.head
 	for curr != nil {
 		fmt.Print(curr.data, " -> ")
-		curr = curr.next
+		curr = curr.GetNext()
 	}
 	fmt.Println(nil)
 }
@@ -75,5 +75,19 @@ func (n *node[T]) GetNext() *node[T] {
 	if n != nil {
 		return n.next
 	}
-	return n.next
+	return nil
+}
+
+func (n *node[T]) SetData(data T) {
+	if n == nil {
+		panic("cannot set data of a nil node")
+	}
+	n.data = data
+}
+
+func (n *node[T]) SetNext(next *node[T]) {
+	if n == nil {
+		panic("cannot set next of a nil node")
+	}
+	n.next = next
 }
