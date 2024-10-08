@@ -2,11 +2,6 @@ package linkedlist
 
 import "fmt"
 
-type Node[T comparable] struct {
-	data T
-	next *Node[T]
-}
-
 type SinglyLinkedList[T comparable] struct {
 	head *Node[T]
 }
@@ -21,7 +16,7 @@ func (sll *SinglyLinkedList[T]) AppendArray(arr []T) {
 	}
 
 	// append first element from the array
-	newNode := &Node[T]{data: arr[0]}
+	newNode := NewNode(arr[0], nil) // &Node[T]{data: arr[0]}
 	if sll.GetHead() == nil {
 		sll.head = newNode
 	} else {
@@ -35,7 +30,8 @@ func (sll *SinglyLinkedList[T]) AppendArray(arr []T) {
 	// append remainder of the array
 	curr := newNode
 	for _, a := range arr[1:] {
-		curr.SetNext(&Node[T]{data: a})
+		// curr.SetNext(&Node[T]{data: a})
+		curr.SetNext(NewNode(a, nil))
 		curr = curr.GetNext()
 	}
 }
@@ -45,7 +41,7 @@ func (sll *SinglyLinkedList[T]) GetHead() *Node[T] {
 }
 
 func (sll *SinglyLinkedList[T]) AppendToTail(data T) {
-	newNode := &Node[T]{data: data}
+	newNode := NewNode(data, nil) //&Node[T]{data: data}
 
 	if sll.head == nil {
 		sll.head = newNode
@@ -87,32 +83,4 @@ func (sll *SinglyLinkedList[T]) Display() {
 		curr = curr.GetNext()
 	}
 	fmt.Println(nil)
-}
-
-func (n *Node[T]) GetData() T {
-	if n == nil {
-		panic("cannot return data of a nil node")
-	}
-	return n.data
-}
-
-func (n *Node[T]) GetNext() *Node[T] {
-	if n != nil {
-		return n.next
-	}
-	return nil
-}
-
-func (n *Node[T]) SetData(data T) {
-	if n == nil {
-		panic("cannot set data of a nil node")
-	}
-	n.data = data
-}
-
-func (n *Node[T]) SetNext(next *Node[T]) {
-	if n == nil {
-		panic("cannot set next of a nil node")
-	}
-	n.next = next
 }
