@@ -84,3 +84,25 @@ func (sll *SinglyLinkedList[T]) Display() {
 	}
 	fmt.Println(nil)
 }
+
+func CompareSinglyLinkedList[T comparable](sll1, sll2 *SinglyLinkedList[T]) bool {
+	if (sll1 == nil && sll2 != nil) || (sll1 != nil && sll2 == nil) {
+		return false
+	}
+
+	curr1, curr2 := sll1.GetHead(), sll2.GetHead()
+
+	for curr1 != nil && curr2 != nil {
+		if curr1.GetData() != curr2.GetData() {
+			return false
+		}
+		curr1 = curr1.GetNext()
+		curr2 = curr2.GetNext()
+	}
+
+	if curr1 != nil || curr2 != nil {
+		return false
+	}
+
+	return true
+}
