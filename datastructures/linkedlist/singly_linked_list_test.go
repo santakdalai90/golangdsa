@@ -3,6 +3,8 @@ package linkedlist
 import (
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSinglyLinkedList(t *testing.T) {
@@ -161,6 +163,35 @@ func TestCompareSinglyLinkedList(t *testing.T) {
 			if result != tt.expected {
 				t.Errorf("expected %v, got %v", tt.expected, result)
 			}
+		})
+	}
+}
+
+// TestToArray tests the ToArray function for various cases
+func TestToArray(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		expected []int
+	}{
+		{"empty list", []int{}, []int{}},
+		{"single element", []int{1}, []int{1}},
+		{"multiple elements", []int{1, 2, 3, 4, 5}, []int{1, 2, 3, 4, 5}},
+		{"repeated elements", []int{2, 2, 2}, []int{2, 2, 2}},
+		{"negative numbers", []int{-5, -10, -15}, []int{-5, -10, -15}},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Create a new linked list and append elements
+			list := NewSinglyLinkedList[int]()
+			list.AppendArray(tt.input)
+
+			// Convert the linked list to array using ToArray method
+			result := list.ToArray()
+
+			// Assert the result matches the expected output
+			assert.Equal(t, tt.expected, result)
 		})
 	}
 }

@@ -94,6 +94,16 @@ func (sll *SinglyLinkedList[T]) Display() {
 	fmt.Println(nil)
 }
 
+func (sll *SinglyLinkedList[T]) ToArray() []T {
+	arr := make([]T, 0)
+	curr := sll.GetHead()
+	for curr != nil {
+		arr = append(arr, curr.GetData())
+		curr = curr.GetNext()
+	}
+	return arr
+}
+
 func CompareSinglyLinkedList[T constraints.Ordered](sll1, sll2 *SinglyLinkedList[T]) bool {
 	if (sll1 == nil && sll2 != nil) || (sll1 != nil && sll2 == nil) {
 		return false
