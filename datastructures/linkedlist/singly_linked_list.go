@@ -1,12 +1,16 @@
 package linkedlist
 
-import "fmt"
+import (
+	"fmt"
 
-type SinglyLinkedList[T comparable] struct {
+	"golang.org/x/exp/constraints"
+)
+
+type SinglyLinkedList[T constraints.Ordered] struct {
 	head *Node[T]
 }
 
-func NewSinglyLinkedList[T comparable]() *SinglyLinkedList[T] {
+func NewSinglyLinkedList[T constraints.Ordered]() *SinglyLinkedList[T] {
 	return &SinglyLinkedList[T]{}
 }
 
@@ -85,7 +89,7 @@ func (sll *SinglyLinkedList[T]) Display() {
 	fmt.Println(nil)
 }
 
-func CompareSinglyLinkedList[T comparable](sll1, sll2 *SinglyLinkedList[T]) bool {
+func CompareSinglyLinkedList[T constraints.Ordered](sll1, sll2 *SinglyLinkedList[T]) bool {
 	if (sll1 == nil && sll2 != nil) || (sll1 != nil && sll2 == nil) {
 		return false
 	}
