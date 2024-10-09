@@ -40,10 +40,6 @@ func (sll *SinglyLinkedList[T]) AppendArray(arr []T) {
 	}
 }
 
-func (sll *SinglyLinkedList[T]) GetHead() *Node[T] {
-	return sll.head
-}
-
 func (sll *SinglyLinkedList[T]) AppendToTail(data T) {
 	newNode := NewNode(data, nil) //&Node[T]{data: data}
 
@@ -58,6 +54,15 @@ func (sll *SinglyLinkedList[T]) AppendToTail(data T) {
 	}
 
 	curr.SetNext(newNode)
+}
+
+func (sll *SinglyLinkedList[T]) GetHead() *Node[T] {
+	return sll.head
+}
+
+// SetHead sets the head pointer to the node provided. Use with caution.
+func (sll *SinglyLinkedList[T]) SetHead(n *Node[T]) {
+	sll.head = n
 }
 
 func (sll *SinglyLinkedList[T]) DeleteNode(data T) {
