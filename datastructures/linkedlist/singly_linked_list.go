@@ -2,6 +2,7 @@ package linkedlist
 
 import (
 	"fmt"
+	"strings"
 
 	"golang.org/x/exp/constraints"
 )
@@ -92,6 +93,17 @@ func (sll *SinglyLinkedList[T]) Display() {
 		curr = curr.GetNext()
 	}
 	fmt.Println(nil)
+}
+
+func (sll *SinglyLinkedList[T]) String() string {
+	curr := sll.head
+	var sb strings.Builder
+	for curr != nil {
+		fmt.Fprint(&sb, curr.data, " -> ")
+		curr = curr.GetNext()
+	}
+	sb.WriteString("nil")
+	return sb.String()
 }
 
 func (sll *SinglyLinkedList[T]) ToArray() []T {

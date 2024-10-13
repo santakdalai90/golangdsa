@@ -195,3 +195,56 @@ func TestToArray(t *testing.T) {
 		})
 	}
 }
+
+// Test function for the String() method of SinglyLinkedList
+func TestSinglyLinkedListString(t *testing.T) {
+	// Define test cases
+	testCases := []struct {
+		name     string
+		elements []int
+		expected string
+	}{
+		{
+			"EmptyList",
+			[]int{},
+			"nil",
+		},
+		{
+			"SingleElementList",
+			[]int{1},
+			"1 -> nil",
+		},
+		{
+			"MultipleElementsList",
+			[]int{1, 2, 3, 4},
+			"1 -> 2 -> 3 -> 4 -> nil",
+		},
+		{
+			"AllSameElements",
+			[]int{5, 5, 5, 5},
+			"5 -> 5 -> 5 -> 5 -> nil",
+		},
+		{
+			"LargeValues",
+			[]int{100000, 200000, 300000},
+			"100000 -> 200000 -> 300000 -> nil",
+		},
+	}
+
+	// Iterate over each test case and use t.Run
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			// Create linked list and append elements
+			list := NewSinglyLinkedList[int]()
+			list.AppendArray(tc.elements)
+
+			// Get the string representation of the list
+			result := list.String()
+
+			// Compare result with expected
+			if result != tc.expected {
+				t.Errorf("Test case %s failed: Expected %q, but got %q", tc.name, tc.expected, result)
+			}
+		})
+	}
+}
