@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestSinglyLinkedList(t *testing.T) {
@@ -244,6 +245,50 @@ func TestSinglyLinkedListString(t *testing.T) {
 			// Compare result with expected
 			if result != tc.expected {
 				t.Errorf("Test case %s failed: Expected %q, but got %q", tc.name, tc.expected, result)
+			}
+		})
+	}
+}
+
+func TestSinglyLinkedList_GetTail(t *testing.T) {
+	tests := []struct {
+		name     string
+		elements []int
+		expected *Node[int]
+	}{
+		{
+			name:     "Empty List",
+			elements: []int{}, // Empty list
+			expected: nil,
+		},
+		{
+			name:     "Single Node List",
+			elements: []int{1}, // Single node A
+			expected: NewNode(1, nil),
+		},
+		{
+			name:     "Multiple Nodes List",
+			elements: []int{1, 2, 3, 4, 5}, // A -> B -> C -> D -> E
+			expected: NewNode(5, nil),
+		},
+		{
+			name:     "List with Two Nodes",
+			elements: []int{1, 2}, // A -> B
+			expected: NewNode(2, nil),
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ll := NewSinglyLinkedList[int]()
+			ll.AppendArray(tt.elements)
+			result := ll.GetTail()
+			if tt.expected == nil {
+				assert.Nil(t, result)
+			} else {
+				require.NotNil(t, result)
+				assert.Equal(t, tt.expected.data, result.data)
+				assert.Nil(t, result.next)
 			}
 		})
 	}

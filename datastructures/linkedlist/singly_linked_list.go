@@ -61,6 +61,17 @@ func (sll *SinglyLinkedList[T]) GetHead() *Node[T] {
 	return sll.head
 }
 
+func (sll *SinglyLinkedList[T]) GetTail() *Node[T] {
+	if sll.head == nil {
+		return nil
+	}
+	t := sll.head
+	for t.next != nil {
+		t = t.next
+	}
+	return t
+}
+
 // SetHead sets the head pointer to the node provided. Use with caution.
 func (sll *SinglyLinkedList[T]) SetHead(n *Node[T]) {
 	sll.head = n
