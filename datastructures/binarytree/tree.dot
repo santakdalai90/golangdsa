@@ -1,0 +1,20 @@
+digraph G {
+  node [shape=circle];
+  node_0x140001221b0 [label="34"];
+  node_0x140001221b0 -> node_0x140001221c8 [label="L"];
+  node_0x140001221c8 [label="56"];
+  node_0x140001221c8 -> node_0x140001221e0 [label="L"];
+  node_0x140001221e0 [label="45"];
+  node_0x140001221e0 -> node_0x140001221f8 [label="L"];
+  node_0x140001221f8 [label="197"];
+  node_0x140001221e0 -> node_0x14000122210 [label="R"];
+  node_0x14000122210 [label="887"];
+  node_0x140001221c8 -> node_0x14000122228 [label="R"];
+  node_0x14000122228 [label="123"];
+  node_0x140001221b0 -> node_0x14000122240 [label="R"];
+  node_0x14000122240 [label="89"];
+  node_0x14000122240 -> node_0x14000122258 [label="L"];
+  node_0x14000122258 [label="434"];
+  node_0x14000122240 -> node_0x14000122270 [label="R"];
+  node_0x14000122270 [label="67868"];
+}
