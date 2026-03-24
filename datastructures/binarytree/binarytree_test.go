@@ -6,229 +6,104 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPreOrderTraversal(t *testing.T) {
-	input := []int{34, 56, 89, 45, 123, 434, 67868, 197, 887}
-	tree := NewBinaryTreeWithSlice[int](
-		input,
-		0,
-		func(a ...int) int {
-			sum := 0
-			for _, x := range a {
-				sum += x
-			}
-			return sum
-		},
-		func(a, b int) int {
-			if a < b {
-				return -1
-			}
-			if a > b {
-				return 1
-			}
-			return 0
-		},
-	)
-
-	tree.root.Print()
-	output := make([]int, 0)
-	tf := func(n *Node[int]) {
-		output = append(output, n.data)
+func newTestTree(input []int) *Tree[int] {
+	sumFn := func(a ...int) int {
+		sum := 0
+		for _, x := range a {
+			sum += x
+		}
+		return sum
 	}
-	tree.PreOrderTraversal(tf)
 
-	assert.Equal(t, len(output), 9)
-	t.Log(output)
-	assert.Equal(t, []int{34, 56, 45, 197, 887, 123, 89, 434, 67868}, output)
+	compareFn := func(a, b int) int {
+		switch {
+		case a < b:
+			return -1
+		case a > b:
+			return 1
+		default:
+			return 0
+		}
+	}
+
+	return NewBinaryTreeWithSlice[int](input, 0, sumFn, compareFn)
 }
 
-func TestPostOrderTraversal(t *testing.T) {
+func TestTraversals(t *testing.T) {
 	input := []int{34, 56, 89, 45, 123, 434, 67868, 197, 887}
-	tree := NewBinaryTreeWithSlice[int](
-		input,
-		0,
-		func(a ...int) int {
-			sum := 0
-			for _, x := range a {
-				sum += x
-			}
-			return sum
-		},
-		func(a, b int) int {
-			if a < b {
-				return -1
-			}
-			if a > b {
-				return 1
-			}
-			return 0
-		},
-	)
 
-	tree.root.Print()
-	output := make([]int, 0)
-	tf := func(n *Node[int]) {
-		output = append(output, n.data)
+	tests := []struct {
+		name     string
+		traverse func(*Tree[int], func(*Node[int]))
+		expected []int
+	}{
+		{
+			name: "PreOrder",
+			traverse: func(t *Tree[int], f func(*Node[int])) {
+				t.PreOrderTraversal(f)
+			},
+			expected: []int{34, 56, 45, 197, 887, 123, 89, 434, 67868},
+		},
+		{
+			name: "PostOrder",
+			traverse: func(t *Tree[int], f func(*Node[int])) {
+				t.PostOrderTraversal(f)
+			},
+			expected: []int{197, 887, 45, 123, 56, 434, 67868, 89, 34},
+		},
+		{
+			name: "InOrder",
+			traverse: func(t *Tree[int], f func(*Node[int])) {
+				t.InOrderTraversal(f)
+			},
+			expected: []int{197, 45, 887, 56, 123, 34, 434, 89, 67868},
+		},
+		{
+			name: "LevelOrder",
+			traverse: func(t *Tree[int], f func(*Node[int])) {
+				t.LevelOrderTraversal(f)
+			},
+			expected: []int{34, 56, 89, 45, 123, 434, 67868, 197, 887},
+		},
 	}
-	tree.PostOrderTraversal(tf)
 
-	assert.Equal(t, len(output), 9)
-	t.Log(output)
-	assert.Equal(t, []int{197, 887, 45, 123, 56, 434, 67868, 89, 34}, output)
-}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tree := newTestTree(input)
 
-func TestInOrderTraversal(t *testing.T) {
-	input := []int{34, 56, 89, 45, 123, 434, 67868, 197, 887}
-	tree := NewBinaryTreeWithSlice[int](
-		input,
-		0,
-		func(a ...int) int {
-			sum := 0
-			for _, x := range a {
-				sum += x
-			}
-			return sum
-		},
-		func(a, b int) int {
-			if a < b {
-				return -1
-			}
-			if a > b {
-				return 1
-			}
-			return 0
-		},
-	)
+			var output []int
+			tt.traverse(tree, func(n *Node[int]) {
+				output = append(output, n.data)
+			})
 
-	tree.root.Print()
-	output := make([]int, 0)
-	tf := func(n *Node[int]) {
-		output = append(output, n.data)
+			assert.Equal(t, tt.expected, output)
+		})
 	}
-	tree.InOrderTraversal(tf)
-
-	assert.Equal(t, len(output), 9)
-	t.Log(output)
-	assert.Equal(t, []int{197, 45, 887, 56, 123, 34, 434, 89, 67868}, output)
-}
-
-func TestLevelOrderTraversal(t *testing.T) {
-	input := []int{34, 56, 89, 45, 123, 434, 67868, 197, 887}
-	tree := NewBinaryTreeWithSlice[int](
-		input,
-		0,
-		func(a ...int) int {
-			sum := 0
-			for _, x := range a {
-				sum += x
-			}
-			return sum
-		},
-		func(a, b int) int {
-			if a < b {
-				return -1
-			}
-			if a > b {
-				return 1
-			}
-			return 0
-		},
-	)
-
-	tree.root.Print()
-	output := make([]int, 0)
-	tf := func(n *Node[int]) {
-		output = append(output, n.data)
-	}
-	tree.LevelOrderTraversal(tf)
-
-	assert.Equal(t, len(output), 9)
-	t.Log(output)
-	assert.Equal(t, []int{34, 56, 89, 45, 123, 434, 67868, 197, 887}, output)
 }
 
 func TestSize(t *testing.T) {
 	input := []int{34, 56, 89, 45, 123, 434, 67868, 197, 887}
-	tree := NewBinaryTreeWithSlice[int](
-		input,
-		0,
-		func(a ...int) int {
-			sum := 0
-			for _, x := range a {
-				sum += x
-			}
-			return sum
-		},
-		func(a, b int) int {
-			if a < b {
-				return -1
-			}
-			if a > b {
-				return 1
-			}
-			return 0
-		},
-	)
+	tree := newTestTree(input)
 
 	tree.root.Print()
-	size := tree.Size()
 
-	assert.Equal(t, size, len(input))
+	assert.Equal(t, len(input), tree.Size())
 }
 
 func TestMaxDepth(t *testing.T) {
 	input := []int{34, 56, 89, 45, 123, 434, 67868, 197, 887}
-	tree := NewBinaryTreeWithSlice[int](
-		input,
-		0,
-		func(a ...int) int {
-			sum := 0
-			for _, x := range a {
-				sum += x
-			}
-			return sum
-		},
-		func(a, b int) int {
-			if a < b {
-				return -1
-			}
-			if a > b {
-				return 1
-			}
-			return 0
-		},
-	)
+	tree := newTestTree(input)
 
 	tree.root.Print()
-	depth := tree.MaxDepth()
 
-	assert.Equal(t, depth, 3)
+	assert.Equal(t, tree.MaxDepth(), 3)
 }
 
 func TestSumTree(t *testing.T) {
 	input := []int{26, 10, 3, 4, 6, 3}
-	tree := NewBinaryTreeWithSlice[int](
-		input,
-		0,
-		func(a ...int) int {
-			sum := 0
-			for _, x := range a {
-				sum += x
-			}
-			return sum
-		},
-		func(a, b int) int {
-			if a < b {
-				return -1
-			}
-			if a > b {
-				return 1
-			}
-			return 0
-		},
-	)
+	tree := newTestTree(input)
 
 	tree.root.Print()
-	output := tree.IsSumTree()
 
-	assert.Equal(t, true, output)
+	assert.Equal(t, true, tree.IsSumTree())
 }
