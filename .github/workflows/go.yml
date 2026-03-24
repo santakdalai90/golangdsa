@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: golang:1.22-alpine
+      image: golang:alpine3.23
 
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
