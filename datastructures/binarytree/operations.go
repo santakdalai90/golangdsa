@@ -1,0 +1,38 @@
+package binarytree
+
+func (b *Node[T]) MaxDepth() int {
+	if b == nil {
+		return -1
+	}
+	return max(b.left.MaxDepth(), b.right.MaxDepth()) + 1
+}
+
+func (b *Node[T]) Size() int {
+	if b == nil {
+		return 0
+	}
+	return b.left.Size() + b.right.Size() + 1
+}
+
+func (b *Node[T]) Max(compare func(T, T) int) *Node[T] {
+	if b == nil {
+		return nil
+	}
+	maxNode := b
+	leftMax := b.left.Max(compare)
+	rightMax := b.right.Max(compare)
+
+	if leftMax != nil {
+		if compare(leftMax.data, maxNode.data) == 1 {
+			maxNode = leftMax
+		}
+	}
+
+	if rightMax != nil {
+		if compare(rightMax.data, maxNode.data) == 1 {
+			maxNode = rightMax
+		}
+	}
+
+	return maxNode
+}

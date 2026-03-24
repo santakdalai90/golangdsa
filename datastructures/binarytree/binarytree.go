@@ -1,109 +1,26 @@
 package binarytree
 
 import (
-	"fmt"
 	"log"
-	"math/rand"
 )
 
-type TraverseFunc[T any] func(node *Node[T])
-
-type Node[T any] struct {
-	data  T
-	left  *Node[T]
-	right *Node[T]
+type Tree[T any] struct {
+	root    *Node[T]
+	zero    T
+	add     func(...T) T
+	compare func(T, T) int // -1 if less, 0 if equal, 1 if more
 }
 
-func NewNode[T any](data T) *Node[T] {
-	return &Node[T]{
-		data: data,
-	}
-}
-
-func (b *Node[T]) PreOrderTraversal(tf TraverseFunc[T]) {
-	if b == nil {
-		return
-	}
-
-	tf(b)
-	b.left.PreOrderTraversal(tf)
-	b.right.PreOrderTraversal(tf)
-}
-
-func (b *Node[T]) PostOrderTraversal(tf TraverseFunc[T]) {
-	if b == nil {
-		return
-	}
-
-	b.left.PostOrderTraversal(tf)
-	b.right.PostOrderTraversal(tf)
-	tf(b)
-}
-
-func (b *Node[T]) InOrderTraversal(tf TraverseFunc[T]) {
-	if b == nil {
-		return
-	}
-
-	b.left.InOrderTraversal(tf)
-	tf(b)
-	b.right.InOrderTraversal(tf)
-}
-
-func (b *Node[T]) Insert(node *Node[T]) {
-	if b == nil || node == nil {
-		return
-	}
-
-	shouldGoLeft := rand.Intn(2) == 1
-	if shouldGoLeft {
-		if b.left != nil {
-			b.left.Insert(node)
-		} else {
-			b.left = node
-		}
-	} else {
-		if b.right != nil {
-			b.right.Insert(node)
-		} else {
-			b.right = node
-		}
+func New[T any](rootValue, zero T, add func(...T) T, compare func(T, T) int) *Tree[T] {
+	return &Tree[T]{
+		root:    &Node[T]{data: rootValue},
+		zero:    zero,
+		add:     add,
+		compare: compare,
 	}
 }
 
-func (b *Node[T]) InsertLeft(node *Node[T]) (*Node[T], error) {
-	if b == nil {
-		return nil, fmt.Errorf("target node is nil")
-	}
-
-	if node == nil {
-		return nil, fmt.Errorf("input node is nil")
-	}
-
-	if b.left != nil {
-		return nil, fmt.Errorf("left of target node is already occupied")
-	}
-	b.left = node
-	return node, nil
-}
-
-func (b *Node[T]) InsertRight(node *Node[T]) (*Node[T], error) {
-	if b == nil {
-		return nil, fmt.Errorf("target node is nil")
-	}
-
-	if node == nil {
-		return nil, fmt.Errorf("input node is nil")
-	}
-
-	if b.right != nil {
-		return nil, fmt.Errorf("right of target node is already occupied")
-	}
-	b.right = node
-	return node, nil
-}
-
-func NewRandomBinaryTree[T any](n int, generator func() T) *Node[T] {
+func NewRandomBinaryTree[T any](n int, zero T, add func(...T) T, compare func(T, T) int, generator func() T) *Tree[T] {
 	log.Printf("generating random tree with %d nodes", n)
 	var root = NewNode(generator())
 	log.Printf("created root node with data %v", root.data)
@@ -112,16 +29,79 @@ func NewRandomBinaryTree[T any](n int, generator func() T) *Node[T] {
 	}
 	log.Printf("generated random tree with %d nodes", n)
 
-	return root
+	return &Tree[T]{
+		root:    root,
+		zero:    zero,
+		add:     add,
+		compare: compare,
+	}
 }
 
-func NewBinaryTreeWithSlice[T any](data []T, index int) *Node[T] {
-	var root *Node[T]
-
-	if index < len(data) {
-		root = &Node[T]{data: data[index]}
-		root.left = NewBinaryTreeWithSlice(data, 2*index+1)
-		root.right = NewBinaryTreeWithSlice(data, 2*index+2)
+func NewBinaryTreeWithSlice[T any](data []T, zero T, add func(...T) T, compare func(T, T) int) *Tree[T] {
+	if len(data) == 0 {
+		return nil
 	}
-	return root
+
+	queue := make([]*Node[T], 1, len(data))
+	queue[0] = NewNode(data[0])
+
+	front := 0
+	i := 1
+
+	for front < len(queue) && i < len(data) {
+		var node = queue[front]
+		front++
+
+		node.left = NewNode(data[i])
+		queue = append(queue, node.left)
+		i++
+
+		if i < len(data) {
+			node.right = NewNode(data[i])
+			queue = append(queue, node.right)
+			i++
+		}
+	}
+
+	return &Tree[T]{
+		root:    queue[0],
+		zero:    zero,
+		add:     add,
+		compare: compare,
+	}
+}
+
+func (t *Tree[T]) PreOrderTraversal(tf TraverseFunc[T]) {
+	t.root.PreOrderTraversal(tf)
+}
+
+func (t *Tree[T]) PostOrderTraversal(tf TraverseFunc[T]) {
+	t.root.PostOrderTraversal(tf)
+}
+
+func (t *Tree[T]) InOrderTraversal(tf TraverseFunc[T]) {
+	t.root.InOrderTraversal(tf)
+}
+
+func (t *Tree[T]) LevelOrderTraversal(tf TraverseFunc[T]) {
+	t.root.LevelOrderTraversal(tf)
+}
+
+func (t *Tree[T]) MaxDepth() int {
+	return t.root.MaxDepth()
+}
+
+func (t *Tree[T]) Size() int {
+	return t.root.Size()
+}
+
+func (t *Tree[T]) Max() T {
+	if maxNode := t.root.Max(t.compare); maxNode != nil {
+		return maxNode.data
+	}
+	return t.zero
+}
+
+func (t *Tree[T]) IsSumTree() bool {
+	return t.root.IsSumTree(t.add, t.zero, t.compare)
 }
