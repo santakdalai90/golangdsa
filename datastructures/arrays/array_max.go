@@ -1,8 +1,10 @@
-package main
+package arrays
 
 import (
 	"errors"
 )
+
+const ErrorEmptyArray = "empty array provided"
 
 // ArrayMax finds the maximum element in an array
 // if array is blank or nil then returns -1, error
