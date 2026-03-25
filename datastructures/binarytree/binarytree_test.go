@@ -34,33 +34,40 @@ func TestTraversals(t *testing.T) {
 
 	tests := []struct {
 		name     string
-		traverse func(*Tree[int], func(*Node[int]))
+		traverse func(*Tree[int], TraverseFunc[int])
 		expected []int
 	}{
 		{
 			name: "PreOrder",
-			traverse: func(t *Tree[int], f func(*Node[int])) {
+			traverse: func(t *Tree[int], f TraverseFunc[int]) {
 				t.PreOrderTraversal(f)
 			},
 			expected: []int{34, 56, 45, 197, 887, 123, 89, 434, 67868},
 		},
 		{
 			name: "PostOrder",
-			traverse: func(t *Tree[int], f func(*Node[int])) {
+			traverse: func(t *Tree[int], f TraverseFunc[int]) {
 				t.PostOrderTraversal(f)
 			},
 			expected: []int{197, 887, 45, 123, 56, 434, 67868, 89, 34},
 		},
 		{
 			name: "InOrder",
-			traverse: func(t *Tree[int], f func(*Node[int])) {
+			traverse: func(t *Tree[int], f TraverseFunc[int]) {
 				t.InOrderTraversal(f)
 			},
 			expected: []int{197, 45, 887, 56, 123, 34, 434, 89, 67868},
 		},
 		{
+			name: "MorrisInOrder",
+			traverse: func(t *Tree[int], f TraverseFunc[int]) {
+				t.MorrisInOrderTraversal(f)
+			},
+			expected: []int{197, 45, 887, 56, 123, 34, 434, 89, 67868},
+		},
+		{
 			name: "LevelOrder",
-			traverse: func(t *Tree[int], f func(*Node[int])) {
+			traverse: func(t *Tree[int], f TraverseFunc[int]) {
 				t.LevelOrderTraversal(f)
 			},
 			expected: []int{34, 56, 89, 45, 123, 434, 67868, 197, 887},

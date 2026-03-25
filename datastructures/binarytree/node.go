@@ -5,8 +5,6 @@ import (
 	"math/rand"
 )
 
-type TraverseFunc[T any] func(node *Node[T])
-
 type Node[T any] struct {
 	data  T
 	left  *Node[T]

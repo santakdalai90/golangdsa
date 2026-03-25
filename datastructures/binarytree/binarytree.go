@@ -83,6 +83,10 @@ func (t *Tree[T]) InOrderTraversal(tf TraverseFunc[T]) {
 	t.root.InOrderTraversal(tf)
 }
 
+func (t *Tree[T]) MorrisInOrderTraversal(tf TraverseFunc[T]) {
+	t.root.MorrisInOrderTraversal(tf)
+}
+
 func (t *Tree[T]) LevelOrderTraversal(tf TraverseFunc[T]) {
 	t.root.LevelOrderTraversal(tf)
 }
