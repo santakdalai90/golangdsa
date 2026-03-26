@@ -122,3 +122,12 @@ func TestIdenticalTrees(t *testing.T) {
 
 	assert.Equal(t, true, tree.IsIdentical(tree2))
 }
+
+func TestFind(t *testing.T) {
+	input := []int{26, 10, 3, 4, 6, 3}
+	tree := newTestTree(input)
+
+	f := tree.root.Find(6, tree.compare)
+
+	assert.Equal(t, 6, f.data)
+}
