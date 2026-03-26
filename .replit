@@ -1,2 +1,6 @@
 language = "go"
 run = "go mod tidy && go test -v ./test/..."
+modules = ["go-1.21"]
+
+[nix]
+channel = "stable-25_05"
