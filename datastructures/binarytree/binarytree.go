@@ -109,3 +109,7 @@ func (t *Tree[T]) Max() T {
 func (t *Tree[T]) IsSumTree() bool {
 	return t.root.IsSumTree(t.add, t.zero, t.compare)
 }
+
+func (t *Tree[T]) IsIdentical(u *Tree[T]) bool {
+	return t.root.IsIdentical(u.root, t.compare)
+}

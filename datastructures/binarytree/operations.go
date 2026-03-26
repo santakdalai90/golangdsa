@@ -36,3 +36,20 @@ func (b *Node[T]) Max(compare func(T, T) int) *Node[T] {
 
 	return maxNode
 }
+
+func (b *Node[T]) IsIdentical(c *Node[T], compare func(T, T) int) bool {
+	if b == nil && c == nil {
+		return true
+	}
+	if b == nil {
+		return false
+	}
+	if c == nil{
+		return false
+	}
+	
+
+	return compare(b.data, c.data) == 0 && 
+		b.left.IsIdentical(c.left, compare) && 
+		b.right.IsIdentical(c.right, compare)
+}

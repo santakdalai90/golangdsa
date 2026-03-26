@@ -4,3 +4,6 @@ modules = ["go-1.21"]
 
 [nix]
 channel = "stable-25_05"
+
+[agent]
+expertMode = true

@@ -1,14 +1,14 @@
 digraph G {
   node [shape=circle];
-  node_0x14000120bb8 [label="26"];
-  node_0x14000120bb8 -> node_0x14000120bd0 [label="L"];
-  node_0x14000120bd0 [label="10"];
-  node_0x14000120bd0 -> node_0x14000120c00 [label="L"];
-  node_0x14000120c00 [label="4"];
-  node_0x14000120bd0 -> node_0x14000120c18 [label="R"];
-  node_0x14000120c18 [label="6"];
-  node_0x14000120bb8 -> node_0x14000120be8 [label="R"];
-  node_0x14000120be8 [label="3"];
-  node_0x14000120be8 -> node_0x14000120c30 [label="L"];
-  node_0x14000120c30 [label="3"];
+  node_0xc000012a38 [label="26"];
+  node_0xc000012a38 -> node_0xc000012a50 [label="L"];
+  node_0xc000012a50 [label="10"];
+  node_0xc000012a50 -> node_0xc000012a80 [label="L"];
+  node_0xc000012a80 [label="4"];
+  node_0xc000012a50 -> node_0xc000012a98 [label="R"];
+  node_0xc000012a98 [label="6"];
+  node_0xc000012a38 -> node_0xc000012a68 [label="R"];
+  node_0xc000012a68 [label="3"];
+  node_0xc000012a68 -> node_0xc000012ab0 [label="L"];
+  node_0xc000012ab0 [label="3"];
 }

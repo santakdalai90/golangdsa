@@ -114,3 +114,11 @@ func TestSumTree(t *testing.T) {
 
 	assert.Equal(t, true, tree.IsSumTree())
 }
+
+func TestIdenticalTrees(t *testing.T) {
+	input := []int{26, 10, 3, 4, 6, 3}
+	tree := newTestTree(input)
+	tree2 := newTestTree(input)
+
+	assert.Equal(t, true, tree.IsIdentical(tree2))
+}
