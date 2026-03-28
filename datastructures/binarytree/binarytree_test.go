@@ -122,3 +122,12 @@ func TestIdenticalTrees(t *testing.T) {
 
 	assert.Equal(t, true, tree.IsIdentical(tree2))
 }
+
+func TestIsMirror(t *testing.T) {
+	input1 := []int{26, 10, 3, 4, 6, 31, 2}
+	tree1 := newTestTree(input1)
+	input2 := []int{26, 3, 10, 2, 31, 6, 4}
+	tree2 := newTestTree(input2)
+
+	assert.Equal(t, true, tree1.IsMirror(tree2))
+}

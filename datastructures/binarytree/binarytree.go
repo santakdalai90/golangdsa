@@ -113,3 +113,7 @@ func (t *Tree[T]) IsSumTree() bool {
 func (t *Tree[T]) IsIdentical(u *Tree[T]) bool {
 	return t.root.IsIdentical(u.root, t.compare)
 }
+
+func (t *Tree[T]) IsMirror(u *Tree[T]) bool {
+	return t.root.IsMirror(u.root, t.compare)
+}
