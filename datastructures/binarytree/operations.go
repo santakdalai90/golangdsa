@@ -44,12 +44,33 @@ func (b *Node[T]) IsIdentical(c *Node[T], compare func(T, T) int) bool {
 	if b == nil {
 		return false
 	}
-	if c == nil{
+	if c == nil {
 		return false
 	}
-	
 
-	return compare(b.data, c.data) == 0 && 
-		b.left.IsIdentical(c.left, compare) && 
+	return compare(b.data, c.data) == 0 &&
+		b.left.IsIdentical(c.left, compare) &&
 		b.right.IsIdentical(c.right, compare)
+}
+
+func (b *Node[T]) Find(x T, cf func(T, T) int) *Node[T] {
+	if b == nil {
+		return nil
+	}
+
+	if cf(b.data, x) == 0 {
+		return b
+	}
+
+	l := b.left.Find(x, cf)
+	if l != nil {
+		return l
+	}
+
+	r := b.right.Find(x, cf)
+	if r != nil {
+		return r
+	}
+
+	return nil
 }

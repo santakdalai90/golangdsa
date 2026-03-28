@@ -114,6 +114,10 @@ func (t *Tree[T]) IsIdentical(u *Tree[T]) bool {
 	return t.root.IsIdentical(u.root, t.compare)
 }
 
+func (t *Tree[T]) Find(x T) *Node[T] {
+	return t.root.Find(x, t.compare)
+}
+
 func (t *Tree[T]) IsMirror(u *Tree[T]) bool {
 	return t.root.IsMirror(u.root, t.compare)
 }
