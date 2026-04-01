@@ -140,3 +140,11 @@ func TestIsMirror(t *testing.T) {
 
 	assert.Equal(t, true, tree1.IsMirror(tree2))
 }
+
+func TestDelete(t *testing.T) {
+	input := []int{26, 10, 3, 4, 6, 31, 2}
+	tree := newTestTree(input)
+
+	tree.Delete()
+	assert.Nil(t, tree.root)
+}

@@ -69,3 +69,13 @@ func (b *Node[T]) InsertRight(node *Node[T]) (*Node[T], error) {
 	b.right = node
 	return node, nil
 }
+
+func (b *Node[T]) Delete() *Node[T] {
+	if b == nil {
+		return nil
+	}
+
+	b.left = b.left.Delete()
+	b.right = b.right.Delete()
+	return nil
+}
